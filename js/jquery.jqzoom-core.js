@@ -625,7 +625,12 @@
 
         function Largeimage() {
             var $obj = this;
-            this.node = new Image();
+            if (settings.imageNodeID) {
+                this.node = document.getElementById(settings.imageNodeID).cloneNode(false);
+                this.node.removeAttribute('id');
+            } else {
+                this.node = new Image();
+            }
             this.loadimage = function (url) {
                 //showing preload
                 loader.show();
@@ -636,7 +641,11 @@
                 this.node.style.left = '-5000px';
                 this.node.style.top = '0px';
                 document.body.appendChild(this.node);
-                this.node.src = url; // fires off async
+                if (settings.imageNodeID) {
+                    this.node.onloadImplementation();
+                } else {
+                    this.node.src = url; // fires off async
+                }
             };
             this.fetchdata = function () {
                 var image = $(this.node);
@@ -661,7 +670,7 @@
                 alert('Problems while loading the big image.');
                 throw 'Problems while loading the big image.';
             };
-            this.node.onload = function () {
+            this.node.onloadImplementation = function () {
                 //fetching data
                 $obj.fetchdata();
                 loader.hide();
@@ -673,6 +682,7 @@
                     lens.setcenter();
                 }
             };
+            this.node.onload = this.node.onloadImplementation;
             this.setposition = function () {
                 var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
                 var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
@@ -688,6 +698,7 @@
     //es. $.jqzoom.disable('#jqzoom1');
     $.jqzoom = {
         defaults: {
+            imageNodeID: '',  // ID of the <img> tag to use instead of creating a new one (the default)
             zoomType: 'standard',
             //innerzoom/standard/reverse/drag
             zoomWidth: 300,
