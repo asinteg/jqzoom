@@ -7,6 +7,7 @@
 
 
 .zoomPreload{
+   -webkit-opacity:0.8;
    -moz-opacity:0.8;
    opacity: 0.8;
    filter: alpha(opacity = 80);
@@ -34,18 +35,16 @@
 
 .zoomPup{
 	overflow:hidden;
-	background-color: #FFF;
-	-moz-opacity:0.6;
-	opacity: 0.6;
-	filter: alpha(opacity = 60);
+        background: none repeat scroll 30% 30% rgba(255, 255, 0, 0.2);
 	z-index:120;
 	position:absolute;
-	border:1px solid #CCC;
+	border: 5px solid #FF0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
   z-index:101;
   cursor:crosshair;
 }
-
-
 
 .zoomOverlay{
 	position:absolute;
@@ -71,8 +70,11 @@
   z-index:110;
 }
 .zoomWrapper{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	position:relative;
-	border:1px solid #999;
+	border:2px solid #999;
   z-index:110;
 }
 .zoomWrapperTitle{
@@ -89,6 +91,7 @@
   top:0px;
   left:0px;
   z-index:120;
+  -webkit-opacity:0.6;
   -moz-opacity:0.6;
   opacity: 0.6;
   filter: alpha(opacity = 60);
@@ -110,6 +113,7 @@
 .zoomIframe{
   z-index: -1;
   filter:alpha(opacity=0);
+  -webkit-opacity: 0.80;
   -moz-opacity: 0.80;
   opacity: 0.80;
   position:absolute;
