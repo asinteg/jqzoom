@@ -682,7 +682,9 @@
                     lens.setcenter();
                 }
             };
-            this.node.onload = this.node.onloadImplementation;
+            if (!settings.imageNodeID) {
+                this.node.onload = this.node.onloadImplementation;
+            }
             this.setposition = function () {
                 var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
                 var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
